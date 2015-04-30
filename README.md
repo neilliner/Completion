@@ -4,15 +4,15 @@
 
 
 ## Created by 
-*[Neil] (https://github.com/neilliner)
-*[Kelly Kim] (https://github.com/Kelly-Kim)
-*[David Elofyson] (https://github.com/deyolfson)
-*[Arie] (https://github.com/vararie)
-*[Hannah E Smith] (https://github.com/hannahesmith)
+[Neil] (https://github.com/neilliner)
+[Kelly Kim] (https://github.com/Kelly-Kim)
+[David Elofyson] (https://github.com/deyolfson)
+[Arie] (https://github.com/vararie)
+[Hannah E Smith] (https://github.com/hannahesmith)
 
 ## Instructor
-* [Ryan Berkey] (https://github.com/rybotron)
-*[Academy of Art University WNM 498 Generative Art & Creative Code Spring 2015](https://github.com/rybotron/wnm498genart15s/wiki/Week-12-Homework)
+[Ryan Berkey] (https://github.com/rybotron)
+[Academy of Art University WNM 498 Generative Art & Creative Code Spring 2015](https://github.com/rybotron/wnm498genart15s/wiki/Week-12-Homework)
 
 ##Story
 The Sand Mandala is a Tibetan Buddhist tradition involving the meditative, ritualistic creation and destruction of mandalas made from colored sand. A sand mandala is ritualistically dismantled once it has been completed and its accompanying ceremonies and viewing are finished to symbolize the Buddhist doctrinal belief in the transitory nature of material life.[wikipedia](http://en.wikipedia.org/wiki/Sand_mandala)
@@ -24,5 +24,5 @@ Upon signing in each player will be granted a section of the mandala. Depending 
 
 
 ##Libraries Used
-* [Three.js](http://threejs.org/)
-* [Node.js](https://nodejs.org/)
+[Three.js](http://threejs.org/)
+[Node.js](https://nodejs.org/)
