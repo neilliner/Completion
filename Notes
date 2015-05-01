@@ -1,0 +1,159 @@
+MANDALA NOTES APRIL 30, 2015
+
+
+100 y 0 on x
+
+distance
+between here and here so nothing goes outside of the circle
+the third player would be this far away from player 2 and so on and so forth
+conditionals
+not random
+follows the user
+
+color pallettes
+keeping the user on a certain path
+soundcloud api
+
+—————————-----------------------------------------------------------
+user can use own song to change the movements
+user feeds information 
+the music will generate the shape
+highs and lows
+volume
+Layers
+Build 1 player layer
+
+Two scenes
+-Overview
+-The one user 1 is drawing on
+
+
+How does the player move around the scene?
+Mouse control
+
+Spiral 
+Equidistant
+streak around
+mouse held down its going to draw two spirals
+tapping you won’t notice
+concentric circles
+POV system
+2 spirals that are spiraling on each other
+
+Camera on a path
+leave geometry behind
+what does moving the mouse around do? what does holding it down? what does the keyboard do?
+
+frequency can be the size of the circles
+looking backwards
+mouse moving around camera attached to it
+click, new shape appears
+math - heading of the camera, constrain camera to only look 45 degrees each way y-depth-gamify
+overlapping geometry
+click spacebar to pull up those options for ctrls
+right click to see the entire mandala from user view
+dropping something directly where i’m looking, set distance(could be random)
+when the user 
+
+set time
+open-ended system, open-ended, infinite rules
+respiral in
+set number of loops 
+the duration of the audio piece
+song generates what shapes they are by the frequency
+not just a spiral, not just a mandala, its a music visualizer
+fine art or game?
+drawing system will be unique overtime
+whats the value add?
+
+
+Drawing system
+
+html drag and drop api, web audio
+
+audio reacting, random number .5 or greater change to this camera angle
+
+design it get colors
+
+landing page to choose music
+animation-live
+
+landing page, end result
+instructions on how to use it
+Landing page on the about page, overview of the project 
+
+Roles-
+UX/UI - Hannah Smith
+Mock up of mandala in cinema4d, landing page, about, visual design-Kelly Kim 
+Neil- File setup
+Arie-
+
+
+Libraries Used:
+-THREE.js
+-sound cloud api
+-TWEEN
+-p5.js(load audio)
+-node.js
+-socket.io
+-screenshot- share to Facebook 
+
+
+Pieces of the puzzle(pseudo-code):
+
+CAMERA
+camera determines where the shape will be drawn
+Position
+type of camera
+get.position
+what the camera is looking at
+camera rotation= camera.position, camera.lookat camera.rotate
+whats the position of the camera over time
+moving on a spiral path
+Positions:
+overview
+user view- does the user face different directions
+spiral equals one job
+Music will determine the shape 
+Probability
+Tied to time
+Null object needs to look back at the spiral
+Laying down points as you go, keep looking at the point behind it
+Spiral, subtle
+
+SHAPES
+methods(class)
+Position
+rotation
+primitives (groups)
+shape.display(what is actually displaying?)
+scene.Add(shape)
+
+environment(atmosphere)
+
+
+LOADER FOR GEOMETRY
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Roles-
+UX/UI - Hannah Smith
+Mock up of mandala in cinema4d, landing page, about, visual design-Kelly Kim 
+Neil- File setup
+Arie-
+David-Math
+
+Libraries Used:
+-THREE.js
+-sound cloud api
+-TWEEN
+-p5.js(load audio)
+-node.js
+-socket.io
+-screenshot- share to Facebook 
+
+
+
+
