@@ -89,7 +89,8 @@ window.addEventListener( 'resize', function(){
 
 renderer.domElement.addEventListener( 'click', onclick, false );
 
-
+var mandala_radius = 1;
+var mandala_detail = 0;
 
 function render() {
 	requestAnimationFrame( render );
@@ -126,8 +127,8 @@ function render() {
 	};
 
 	
-	
-
+	//mandala_radius += 0.5;
+	//mandala_detail += 0.5;
 
 	
 	// Update the controls each time through the loop
@@ -137,24 +138,27 @@ render();
 
 function makestuff(){
 	for (var i = 0; i < stuff.length; i++) {
-	    var cubes = madestuff[i] = new THREE.Mesh( geometry, material );
+		//var mandala_geometry = new THREE.IcosahedronGeometry( mandala_radius, mandala_detail );
+		var randY = Math.floor((Math.random() * 10)) - 5 ;
+		var mandala_geometry = new THREE.DodecahedronGeometry( Math.floor((Math.random() * 2)), Math.floor((Math.random() * 3)) );
+	    var cubes = new THREE.Mesh( mandala_geometry, material );
 			cubes.position.x = cube.position.x; 
-			cubes.position.y = cube.position.y; 
+			cubes.position.y = cube.position.y + randY; 
 			cubes.position.z = cube.position.z;
 		
-		var cubesb = madestuff[i] = new THREE.Mesh( geometry, material );
+		var cubesb = new THREE.Mesh( mandala_geometry, material );
 			cubesb.position.x = -cube.position.x; 
-			cubesb.position.y = -cube.position.y; 
+			cubesb.position.y = cube.position.y + randY; 
 			cubesb.position.z = -cube.position.z;
 
-		var cubesc = madestuff[i] = new THREE.Mesh( geometry, material );
+		var cubesc = new THREE.Mesh( mandala_geometry, material );
 			cubesc.position.x = -cube.position.x; 
-			cubesc.position.y = cube.position.y; 
+			cubesc.position.y = cube.position.y + randY; 
 			cubesc.position.z = cube.position.z;
 
-		var cubesd = madestuff[i] = new THREE.Mesh( geometry, material );
+		var cubesd = new THREE.Mesh( mandala_geometry, material );
 			cubesd.position.x =  cube.position.x;  
-			cubesd.position.y = -cube.position.y; 
+			cubesd.position.y = cube.position.y + randY; 
 			cubesd.position.z = -cube.position.z;	
 
 
