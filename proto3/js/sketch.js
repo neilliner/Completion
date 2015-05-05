@@ -18,7 +18,7 @@ var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHe
 var camerab = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
 var light = new THREE.PointLight(0xffffff);
-light.position.set(0,0,5);
+light.position.set(0,20,10);
 scene.add(light);
 
 
@@ -89,8 +89,8 @@ window.addEventListener( 'resize', function(){
 
 renderer.domElement.addEventListener( 'click', onclick, false );
 
-var mandala_radius = 1;
-var mandala_detail = 0;
+// var mandala_radius = 1;
+// var mandala_detail = 0;
 
 function render() {
 	requestAnimationFrame( render );
@@ -137,26 +137,28 @@ function render() {
 render();
 
 function makestuff(){
-	for (var i = 0; i < stuff.length; i++) {
+	//for (var i = 0; i < stuff.length; i++) {
 		//var mandala_geometry = new THREE.IcosahedronGeometry( mandala_radius, mandala_detail );
 		var randY = Math.floor((Math.random() * 10)) - 5 ;
+		var randColor = new THREE.Color(Math.random(),Math.random(),Math.random());
 		var mandala_geometry = new THREE.DodecahedronGeometry( Math.floor((Math.random() * 2)), Math.floor((Math.random() * 3)) );
-	    var cubes = new THREE.Mesh( mandala_geometry, material );
+	    var mandala_material = new THREE.MeshPhongMaterial( { color: randColor, specular: 0x009900, shininess: 30, shading: THREE.FlatShading } );
+	    var cubes = new THREE.Mesh( mandala_geometry, mandala_material );
 			cubes.position.x = cube.position.x; 
 			cubes.position.y = cube.position.y + randY; 
 			cubes.position.z = cube.position.z;
 		
-		var cubesb = new THREE.Mesh( mandala_geometry, material );
+		var cubesb = new THREE.Mesh( mandala_geometry, mandala_material );
 			cubesb.position.x = -cube.position.x; 
 			cubesb.position.y = cube.position.y + randY; 
 			cubesb.position.z = -cube.position.z;
 
-		var cubesc = new THREE.Mesh( mandala_geometry, material );
+		var cubesc = new THREE.Mesh( mandala_geometry, mandala_material );
 			cubesc.position.x = -cube.position.x; 
 			cubesc.position.y = cube.position.y + randY; 
 			cubesc.position.z = cube.position.z;
 
-		var cubesd = new THREE.Mesh( mandala_geometry, material );
+		var cubesd = new THREE.Mesh( mandala_geometry, mandala_material );
 			cubesd.position.x =  cube.position.x;  
 			cubesd.position.y = cube.position.y + randY; 
 			cubesd.position.z = -cube.position.z;	
@@ -164,7 +166,7 @@ function makestuff(){
 
 		scene.add( cubes, cubesb, cubesc, cubesd );
 		
-	};
+	//};
 }
 
 function onclick( event ) {
