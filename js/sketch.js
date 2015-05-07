@@ -45,10 +45,9 @@ window.addEventListener('resize', function(){
 //-- particles
     var particlesQty = 3000;
     	particlesGeometry = new THREE.SphereGeometry();
-        // particlesGeometry = new THREE.SphereGeometry(Math.random() * 500 - 250, Math.random() * 500 - 250, Math.random() * 500 - 250);
 
         materialOptions = {
-            size: 1.0,
+            size: .3,
             transparency: true, 
             opacity: 0.5
         };
@@ -60,8 +59,8 @@ window.addEventListener('resize', function(){
 
         var particlesVertex = new THREE.Vector3(Math.random() * 500 - 250, Math.random() * 500 - 250, Math.random() * 500 - 250);
         particlesVertex.x = Math.random() * 2000 - 1000;
-        particlesVertex.y = Math.random() * 1000 - 500;
-        particlesVertex.z = Math.random() * 1000 - 500;
+        particlesVertex.y = Math.random() * 2000 - 1000;
+        particlesVertex.z = Math.random() * 2000 - 1000;
 
         particlesGeometry.vertices.push(particlesVertex);
     }
