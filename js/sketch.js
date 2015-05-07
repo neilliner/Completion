@@ -1,5 +1,5 @@
 
-var camera, scene, renderer;
+var camera, scene, renderer, particles;
 
 var width = window.innerWidth;
 var height = window.innerHeight;
@@ -42,9 +42,41 @@ window.addEventListener('resize', function(){
     renderer.setSize(width, height);
 }, false );
 
+//-- particles
+    var particlesQty = 3000;
+        particlesGeometry = new THREE.SphereGeometry(Math.random() * 500 - 250, Math.random() * 500 - 250, Math.random() * 500 - 250);
+
+        materialOptions = {
+            size: 1.0,
+            transparency: true, 
+            opacity: 0.5
+        };
+
+        particlesStuff = new THREE.PointCloudMaterial(materialOptions);
+
+
+    for (var i = 0; i < particlesQty; i++) {     
+
+        var particlesVertex = new THREE.Vector3(Math.random() * 500 - 250, Math.random() * 500 - 250, Math.random() * 500 - 250);
+        particlesVertex.x = Math.random() * 2000 - 1000;
+        particlesVertex.y = Math.random() * 1000 - 500;
+        particlesVertex.z = Math.random() * 1000 - 500;
+
+        particlesGeometry.vertices.push(particlesVertex);
+    }
+
+    particles = new THREE.PointCloud(particlesGeometry, particlesStuff);
+    scene.add(particles);
+
+    scene.fog = new THREE.FogExp2( 0xff00000, 0.0009 ); 
+
+
+
 function render(){
     requestAnimationFrame(render);
-    renderer.render(scene,camera);   
+    renderer.render(scene,camera); 
+    particles.rotation.x += .0009;
+    particles.rotation.y += .0009;
 }
 
 render();
