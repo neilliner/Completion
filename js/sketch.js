@@ -10,7 +10,7 @@ var hX = height / 2;
 scene = new THREE.Scene();
 
 camera = new THREE.PerspectiveCamera( 75, width / height, 0.5, 1000 );
-camera.position.z = 535;
+camera.position.z = -424;
 
 var light = new THREE.PointLight();
 light.position.set( 0, 10, 10 );
