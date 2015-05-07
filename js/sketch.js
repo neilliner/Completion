@@ -44,7 +44,8 @@ window.addEventListener('resize', function(){
 
 //-- particles
     var particlesQty = 3000;
-        particlesGeometry = new THREE.SphereGeometry(Math.random() * 500 - 250, Math.random() * 500 - 250, Math.random() * 500 - 250);
+    	particlesGeometry = new THREE.SphereGeometry();
+        // particlesGeometry = new THREE.SphereGeometry(Math.random() * 500 - 250, Math.random() * 500 - 250, Math.random() * 500 - 250);
 
         materialOptions = {
             size: 1.0,
