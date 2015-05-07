@@ -1,0 +1,161 @@
+
+
+body {
+	padding: 0; 
+	margin: 0; 
+	overflow: hidden;
+	font-family: 'Roboto Condensed', sans-serif;
+} 
+
+canvas{ 
+	width: 100%; 
+	height: 100%; 
+	padding:0; 
+}
+
+
+/*** HERO ***/
+
+#hero{
+	color: #fff;
+	position:absolute;
+	width: 100%;
+	height: auto;
+	top: 40%;
+}
+
+.title{
+	top: 50%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.headline{
+	font-family: 'Venera-300','Helvetica Neue', Sans-Serif;
+	text-transform: uppercase;
+	font-size: 5em;
+	margin-bottom: 10px;
+}
+
+.subhead{
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: 300;
+	font-size: 1.25em;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.title .button {		
+	border: 1px solid;
+	width: 120px;
+	margin: 0 auto;
+	padding: 12px;
+	font-size: 14px;
+	margin-top: 40px;
+	letter-spacing: 2px;
+	cursor: pointer;
+	text-transform: uppercase;
+	font-weight: 400;
+	border-radius: 8px;
+}
+
+.title .button:hover{
+	color: #333;
+    background-color: rgba(255,255,255,0.8);
+    -webkit-transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
+}
+
+
+/*** FOOTER ***/
+
+#footer{
+	color: #fff;
+	position:absolute;
+	width: 100%;
+	height: auto;
+	bottom: 7%;
+}
+
+.details{
+    clear: both;
+    margin: 0 auto;
+    width: 90%;
+}
+
+.details .d_item{
+    float: left;
+    margin: 0;
+    width: 50%;
+}
+
+.d_item{
+	font-weight: 300;
+	font-size: 14px;
+	letter-spacing: 1px;
+}
+
+.d_item .info_icon{
+	float: right;
+}
+
+.info_icon{
+	width: 25px;
+	height: auto;
+	opacity: 0.8;
+	cursor: pointer;
+	opacity: 0.6;
+}
+
+.info_icon:hover{
+	color: #fff;
+	opacity: 0.9;
+    -webkit-transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
+}
+
+
+/*** FONTS ***/
+
+@font-face {
+    font-family: 'knockout_htf47-bantamweightRg';
+    src: url('../fonts/knockout-webfont.eot');
+    src: url('../fonts/knockout-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/knockout-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+	font-family: 'Venera-100';
+	src: url('../fonts/Venera-100.eot');
+	src: url('../fonts/Venera-100.woff') format('woff'), 
+		 url('../fonts/Venera-100.ttf') format('truetype'); 
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Venera-300';
+	src: url('../fonts/Venera-300.eot');
+	src: url('../fonts/Venera-300.woff') format('woff'), 
+		 url('../fonts/Venera-300.ttf') format('truetype'); 
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Venera-500';
+	src: url('../fonts/Venera-500.eot');
+	src: url('../fonts/Venera-500.woff') format('woff'), 
+		 url('../fonts/Venera-500.ttf') format('truetype'); 
+	font-weight: normal;
+	font-style: normal;
+}

@@ -10,7 +10,7 @@ var hX = height / 2;
 scene = new THREE.Scene();
 
 camera = new THREE.PerspectiveCamera( 75, width / height, 0.5, 1000 );
-camera.position.z = 5;
+camera.position.z = 535;
 
 var light = new THREE.PointLight();
 light.position.set( 0, 10, 10 );
@@ -45,9 +45,10 @@ window.addEventListener('resize', function(){
 //-- particles
     var particlesQty = 3000;
     	particlesGeometry = new THREE.SphereGeometry();
+        particlesGeometry = new THREE.SphereGeometry(500 - 250, 500 - 250, 50 - 20);
 
         materialOptions = {
-            size: .3,
+            size: 1.0,
             transparency: true, 
             opacity: 0.5
         };
@@ -59,8 +60,8 @@ window.addEventListener('resize', function(){
 
         var particlesVertex = new THREE.Vector3(Math.random() * 500 - 250, Math.random() * 500 - 250, Math.random() * 500 - 250);
         particlesVertex.x = Math.random() * 2000 - 1000;
-        particlesVertex.y = Math.random() * 2000 - 1000;
-        particlesVertex.z = Math.random() * 2000 - 1000;
+        particlesVertex.y = Math.random() * 1000 - 500;
+        particlesVertex.z = Math.random() * 1000 - 500;
 
         particlesGeometry.vertices.push(particlesVertex);
     }
@@ -68,7 +69,7 @@ window.addEventListener('resize', function(){
     particles = new THREE.PointCloud(particlesGeometry, particlesStuff);
     scene.add(particles);
 
-    scene.fog = new THREE.FogExp2( 0xff00000, 0.0009 ); 
+    scene.fog = new THREE.FogExp2( 0x00cfff, 0.009 ); 
 
 
 
