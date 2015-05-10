@@ -1,10 +1,121 @@
-
 //global vars
 
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
 
 var theta = 0;
+
+//music global vars
+
+window.onload = init;
+var context;
+var bufferLoader;
+var analyser;
+var source;
+var dataArray;
+var soundLoaded = false; 
+
+//****************************** music functions ******************************
+
+function init() {
+ 
+  window.AudioContext = window.AudioContext || window.webkitAudioContext;
+  context = new AudioContext();
+
+  analyser = context.createAnalyser();
+  analyser.smoothingTimeConstant = 1;
+  var bufferLength = analyser.frequencyBinCount;
+  dataArray = new Uint8Array(bufferLength);
+
+  bufferLoader = new BufferLoader(
+    context,
+    [
+    'music/Moments.mp3',
+    ],
+    finishedLoading
+  );
+
+  bufferLoader.load();
+
+  analyzer = context.createAnalyser();
+}
+
+function finishedLoading(bufferList) {
+  var source1 = context.createBufferSource();
+  source1.buffer = bufferList[0];
+
+  source1.connect(context.destination);
+  source1.connect(analyser);
+
+  source1.start(0);
+
+  soundLoaded = true;
+}
+
+//********** BufferLoader Class **********
+
+function BufferLoader(context, urlList, callback) {
+  this.context = context;
+  this.urlList = urlList;
+  this.onload = callback;
+  this.bufferList = new Array();
+  this.loadCount = 0;
+}
+
+BufferLoader.prototype.loadBuffer = function(url, index) {
+  // Load buffer asynchronously
+  var request = new XMLHttpRequest();
+  request.open("GET", url, true);
+  request.responseType = "arraybuffer";
+
+  var loader = this;
+
+  request.onload = function() {
+    // Asynchronously decode the audio file data in request.response
+    loader.context.decodeAudioData(
+      request.response,
+      function(buffer) {
+        if (!buffer) {
+          alert('error decoding file data: ' + url);
+          return;
+        }
+        loader.bufferList[index] = buffer;
+        if (++loader.loadCount == loader.urlList.length)
+          loader.onload(loader.bufferList);
+      },
+      function(error) {
+        console.error('decodeAudioData error', error);
+      }
+    );
+  }
+
+  request.onerror = function() {
+    alert('BufferLoader: XHR error');
+  }
+
+  request.send();
+}
+
+BufferLoader.prototype.load = function() {
+  for (var i = 0; i < this.urlList.length; ++i)
+  this.loadBuffer(this.urlList[i], i);
+}
+
+//****************************** end of music functions ******************************
+
+// Helper function map()
+function map(inputValue, actualMin, actualMax, newMin, newMax) {
+	return (inputValue - actualMin) / (actualMax - actualMin) * (newMax - newMin) + newMin;
+}
+
+	// to clear all shapes
+	window.onkeydown = function(e){
+		if(e.keyCode === 32){
+    		e.preventDefault();
+    		console.log("spacebar pressed");
+    		scene.children.splice(6,scene.children.length-6);
+		}
+	}
 
 //scene
 var scene = new THREE.Scene();
@@ -143,7 +254,7 @@ function render() {
 
 	var limit = cameraA.position.z;
 
-
+	if(soundLoaded) analyser.getByteTimeDomainData(dataArray);
 
 //inner light position and movement
 	lightsAR += .0125; 
@@ -207,7 +318,15 @@ function render() {
 		renderer.render( scene, cameraB );
 	};
 
+	// make sound frequencies triggering the size of shapes
 	
+	if(scene.children.length > 6){
+		for(var i = 6;i < scene.children.length; i++){
+			scene.children[i].scale.x = map(dataArray[Math.floor(map(i,6,scene.children.length,0,1023))],128,255,1,3);
+			scene.children[i].scale.y = map(dataArray[Math.floor(map(i,6,scene.children.length,0,1023))],128,255,1,3);
+			scene.children[i].scale.z = map(dataArray[Math.floor(map(i,6,scene.children.length,0,1023))],128,255,1,3);
+		}
+	}
 
 }
 render();
