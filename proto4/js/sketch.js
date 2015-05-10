@@ -108,14 +108,14 @@ function map(inputValue, actualMin, actualMax, newMin, newMax) {
 	return (inputValue - actualMin) / (actualMax - actualMin) * (newMax - newMin) + newMin;
 }
 
-	// to clear all shapes
-	window.onkeydown = function(e){
-		if(e.keyCode === 32){
-    		e.preventDefault();
-    		console.log("spacebar pressed");
-    		scene.children.splice(6,scene.children.length-6);
-		}
-	}
+// to clear all shapes
+window.onkeydown = function(e){
+	if(e.keyCode === 32){ // temporarily set to spacebar
+   		e.preventDefault();
+   		console.log("spacebar pressed");
+   		scene.children.splice(6,scene.children.length-6);
+   	}
+}
 
 //scene
 var scene = new THREE.Scene();
