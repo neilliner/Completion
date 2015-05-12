@@ -15,6 +15,13 @@ var source;
 var dataArray;
 var soundLoaded = false; 
 
+//****************************** Collada Loader ************************//
+
+
+
+
+
+
 //****************************** music functions ******************************
 
 function init() {
@@ -38,6 +45,40 @@ function init() {
   bufferLoader.load();
 
   analyzer = context.createAnalyser();
+
+var manager = new THREE.LoadingManager();
+manager.onProgress = function ( item, loaded, total ){
+	console.log( item, loaded, total );
+}
+
+var texture = new THREE.Texture();
+var loader = new THREE.ImageLoader( manager );
+loader.load( 'textures/blue.jpg', function( image ){
+
+	texture.image = image;
+	texture.needsUpdate = true;
+
+});
+
+
+var dae;
+
+var loader = new THREE.ColladaLoader( manager );
+loader.load( '/models/drop.dae', function( collada ){
+
+	dae = collada.scene;
+	// console.log(collada);
+
+	dae.traverse( function ( child ){
+		if ( child instanceof THREE.Mesh ){
+			child.material.map = texture;
+		}
+	});
+
+	dae.scale.set( .005, .005, .005);
+	scene.add(dae);
+});
+
 }
 
 function finishedLoading(bufferList) {
