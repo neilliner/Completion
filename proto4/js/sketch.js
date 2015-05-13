@@ -46,22 +46,22 @@ function init() {
 
 	//****************************** collada ******************************
 
-	manager = new THREE.LoadingManager();
-	manager.onProgress = function ( item, loaded, total ){
-		console.log( item, loaded, total );
-	}
+	// manager = new THREE.LoadingManager();
+	// manager.onProgress = function ( item, loaded, total ){
+	// 	console.log( item, loaded, total );
+	// }
 
 
-	var loader = new THREE.ColladaLoader( manager );
-	loader.load( '/models/drop.dae', function( collada ){
-		dae = collada.scene;
-		console.log("Yes");		
-		dae.scale.set( .005, .005, .005);		
-	});
+	// var loader = new THREE.ColladaLoader( manager );
+	// loader.load( '/models/drop.dae', function( collada ){
+	// 	dae = collada.scene;
+	// 	console.log("Yes");		
+	// 	dae.scale.set( .005, .005, .005);		
+	// });
 
-	dae.position.x = cube.position.x; 
-	dae.position.y = cube.position.y + randY; 
-	dae.position.z = cube.position.z;
+	// dae.position.x = cube.position.x; 
+	// dae.position.y = cube.position.y + randY; 
+	// dae.position.z = cube.position.z;
 }
 
 function finishedLoading(bufferList) {
@@ -388,42 +388,40 @@ function render() {
 
 }
 render();
-var dae1, dae2, dae3, dae4;
 
 function Addgeometry(){
 	//for (var i = 0; i < stuff.length; i++) {
 		//var mandala_geometry = new THREE.IcosahedronGeometry( mandala_radius, mandala_detail );
 		var randY = Math.floor((Math.random() * 10)) - 5 ;
-		//var randColor = new THREE.Color(Math.random(),Math.random(),Math.random());
-		// var mandala_geometry = new THREE.DodecahedronGeometry( Math.floor((Math.random() * 2)), Math.floor((Math.random() * 3)) );
-	 //    var mandala_material = new THREE.MeshPhongMaterial( { color: randColor, specular: 0x009900, shininess: 30, shading: THREE.FlatShading } );
-	 //    var cubes = new TREE.Mesh( mandala_geometry, mandala_material );
-		// 	cubes.position.x = cube.position.x; 
-		// 	cubes.position.y = cube.position.y + randY; 
-		// 	cubes.position.z = cube.position.z;
+		var randColor = new THREE.Color(Math.random(),Math.random(),Math.random());
+		var mandala_geometry = new THREE.DodecahedronGeometry( Math.floor((Math.random() * 2)), Math.floor((Math.random() * 3)) );
+	    var mandala_material = new THREE.MeshPhongMaterial( { color: randColor, specular: 0x009900, shininess: 30, shading: THREE.FlatShading } );
+	    var cubes = new THREE.Mesh( mandala_geometry, mandala_material );
+			cubes.position.x = cube.position.x; 
+			cubes.position.y = cube.position.y + randY; 
+			cubes.position.z = cube.position.z;
 		
-		// var cubesb = new THREE.Mesh( mandala_geometry, mandala_material );
-		// 	cubesb.position.x = -cube.position.x; 
-		// 	cubesb.position.y = cube.position.y + randY; 
-		// 	cubesb.position.z = -cube.position.z;
+		var cubesb = new THREE.Mesh( mandala_geometry, mandala_material );
+			cubesb.position.x = -cube.position.x; 
+			cubesb.position.y = cube.position.y + randY; 
+			cubesb.position.z = -cube.position.z;
 
-		// var cubesc = new THREE.Mesh( mandala_geometry, mandala_material );
-		// 	cubesc.position.x = -cube.position.x; 
-		// 	cubesc.position.y = cube.position.y + randY; 
-		// 	cubesc.position.z = cube.position.z;
+		var cubesc = new THREE.Mesh( mandala_geometry, mandala_material );
+			cubesc.position.x = -cube.position.x; 
+			cubesc.position.y = cube.position.y + randY; 
+			cubesc.position.z = cube.position.z;
 
-		// var cubesd = new THREE.Mesh( mandala_geometry, mandala_material );
-		// 	cubesd.position.x =  cube.position.x;  
-		// 	cubesd.position.y = cube.position.y + randY; 
-		// 	cubesd.position.z = -cube.position.z;
+		var cubesd = new THREE.Mesh( mandala_geometry, mandala_material );
+			cubesd.position.x =  cube.position.x;  
+			cubesd.position.y = cube.position.y + randY; 
+			cubesd.position.z = -cube.position.z;
 
+		scene.add(cubes);
 
-
-		dae.position.x = cube.position.x; 
-		dae.position.y = cube.position.y + randY; 
-		dae.position.z = cube.position.z;
-		scene.add( dae);
-
+		// dae.position.x = cube.position.x; 
+		// dae.position.y = cube.position.y + randY; 
+		// dae.position.z = cube.position.z;
+		// scene.add( dae);
 }
 
 function onclick( event ) {
