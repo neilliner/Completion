@@ -1,5 +1,5 @@
 //global vars
-
+// David
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
 
