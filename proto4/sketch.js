@@ -53,28 +53,28 @@ function init() {
 
 
 	var loader = new THREE.ColladaLoader( manager );
-		loader.load( '/models/drop.dae', function( collada ){
-			dae = collada.scene;
-			console.log("Yes");		
-			dae.scale.set( .005, .005, .005);		
-		});
+	loader.load( '/models/drop.dae', function( collada ){
+		dae = collada.scene;
+		console.log("Yes");		
+		dae.scale.set( .005, .005, .005);		
+	});
 
-		dae.position.x = cube.position.x; 
-		dae.position.y = cube.position.y + randY; 
-		dae.position.z = cube.position.z;
-	}
+	dae.position.x = cube.position.x; 
+	dae.position.y = cube.position.y + randY; 
+	dae.position.z = cube.position.z;
+}
 
-	function finishedLoading(bufferList) {
-	  var source1 = context.createBufferSource();
-	  source1.buffer = bufferList[0];
+function finishedLoading(bufferList) {
+	var source1 = context.createBufferSource();
+	source1.buffer = bufferList[0];
 
-	  source1.connect(context.destination);
-	  source1.connect(analyser);
+	source1.connect(context.destination);
+	source1.connect(analyser);
 
-	  source1.start(0);
+	source1.start(0);
 
-	  soundLoaded = true;
-	}
+	soundLoaded = true;
+}
 
 //********** BufferLoader Class **********
 
@@ -244,11 +244,45 @@ for (var i = 0; i < steps; i++) {
  			//scene.add( light );
 };
 
+//-- particles
+var particlesQty = 3000;
+
+	particlesGeometry = new THREE.SphereGeometry( );
+
+    particlesGeometry = new THREE.SphereGeometry(2000, 50, 50);
+
+    materialOptions = {
+        size: 1.0,
+        transparency: true, 
+        opacity: 0.5
+    };
+
+    particlesStuff = new THREE.PointCloudMaterial(materialOptions);
+
+
+for (var i = 0; i < particlesQty; i++) {   
+
+	var particlesVertex = new THREE.Vector3();
+    particlesVertex.x = Math.random() * 2000 - 1000;
+    particlesVertex.y = Math.random() * 1000 - 500;
+    particlesVertex.z = Math.random() * 1000 - 500;
+
+    particlesGeometry.vertices.push(particlesVertex);
+}
+
+particles = new THREE.PointCloud( particlesGeometry, particlesStuff ); // geometry, material
+particles.rotation.x = 90;
+particles.rotation.z = 90;
+scene.add(particles);
+
+scene.fog = new THREE.FogExp2( 0x00cfff, 0.009 ); // color of the particle
+//-- particle
+
 
 //renderer
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
-renderer.setClearColor(0x333F47, 1);
+renderer.setClearColor(0x000000, 1);
 document.body.appendChild( renderer.domElement );
 
 
