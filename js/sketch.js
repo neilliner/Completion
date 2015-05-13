@@ -46,18 +46,22 @@ function init() {
 
 	//****************************** collada ******************************
 
-manager = new THREE.LoadingManager();
-manager.onProgress = function ( item, loaded, total ){
-	console.log( item, loaded, total );
-}
+// manager = new THREE.LoadingManager();
+// manager.onProgress = function ( item, loaded, total ){
+// 	console.log( item, loaded, total );
+// }
 
 
-var loader = new THREE.ColladaLoader( manager );
-loader.load( 'http://www.neilsite.com/collada/drop.dae', function( collada ){
-	dae = collada.scene;
-	console.log("Yes");		
-	dae.scale.set( .005, .005, .005);		
-});
+// var loader = new THREE.ColladaLoader();
+// loader.load( 'models/drop.dae', function( collada ){
+// 	//console.log(collada.dae.scene.scene.position);
+// 	//console.log(collada.dae.scene.scene);
+// 	console.log(collada.dae);
+// 	//dae = collada.children[0].children[0];	
+// 	//dae = collada.dae.scene.scene;
+// 	//dae.scale.set( .005, .005, .005);		
+// 	scene.add(collada.scene);
+// });
 
 	// dae.position.x = cube.position.x; 
 	// dae.position.y = cube.position.y + randY; 
@@ -378,21 +382,23 @@ function render() {
 
 	// make sound frequencies triggering the size of shapes
 	
-	// if(scene.children.length > 6){
-	// 	for(var i = 6;i < scene.children.length; i++){
-	// 		scene.children[i].scale.x = map(dataArray[Math.floor(map(i,6,scene.children.length,0,1023))],128,255,1,3);
-	// 		scene.children[i].scale.y = map(dataArray[Math.floor(map(i,6,scene.children.length,0,1023))],128,255,1,3);
-	// 		scene.children[i].scale.z = map(dataArray[Math.floor(map(i,6,scene.children.length,0,1023))],128,255,1,3);
-	// 	}
-	// }
+// if(scene.children.length > 7){
+// 	for(var i = 7;i < scene.children.length; i++){
+// 		scene.children[i].scale.x = map(dataArray[Math.floor(map(i,7,scene.children.length,0,1023))],128,255,.005,.01);
+// 		scene.children[i].scale.y = map(dataArray[Math.floor(map(i,7,scene.children.length,0,1023))],128,255,.005,.01);
+// 		scene.children[i].scale.z = map(dataArray[Math.floor(map(i,7,scene.children.length,0,1023))],128,255,.005,.01);
+// 	}
+// }
 
 }
 render();
 
 function Addgeometry(){
+	genFourShapes(Math.floor((Math.random() * 6) + 1));
+	//genFourShapes(5);
 	//for (var i = 0; i < stuff.length; i++) {
 		//var mandala_geometry = new THREE.IcosahedronGeometry( mandala_radius, mandala_detail );
-		var randY = Math.floor((Math.random() * 10)) - 5 ;
+		// var randY = Math.floor((Math.random() * 10)) - 5 ;
 // 		var randColor = new THREE.Color(Math.random(),Math.random(),Math.random());
 // 		var mandala_geometry = new THREE.DodecahedronGeometry( Math.floor((Math.random() * 2)), Math.floor((Math.random() * 3)) );
 // 	    var mandala_material = new THREE.MeshPhongMaterial( { color: randColor, specular: 0x009900, shininess: 30, shading: THREE.FlatShading } );
@@ -418,10 +424,83 @@ function Addgeometry(){
 
 // 		scene.add(cubes);
 
-		dae.position.x = cube.position.x; 
-		dae.position.y = cube.position.y + randY; 
-		dae.position.z = cube.position.z;
-		scene.add( dae);
+		// var loader = new THREE.ColladaLoader();
+// 		
+// 		loader.load( 'models/drop.dae', function( collada ){
+// 		
+// 		collada.scene.traverse( function ( child ){
+// 			if ( child instanceof THREE.Mesh ){
+// 				child.material.color = randColor;
+// 				child.material.shininess = 100;
+// 			}
+// 		});
+// 		
+// 		collada.scene.position.x = cube.position.x;			
+// 		collada.scene.position.y = cube.position.y + randY; 
+// 		collada.scene.position.z = cube.position.z;
+// 		
+// 		scene.add(collada.scene);
+// 		});
+// 		
+// 		var loader = new THREE.ColladaLoader();
+// 		loader.load( 'models/drop.dae', function( collada ){
+// 		
+// 		collada.scene.traverse( function ( child ){
+// 			if ( child instanceof THREE.Mesh ){
+// 
+// 				child.material.color = randColor;
+// 				child.material.shininess = 100;
+// 			}
+// 		});
+// 		
+// 		collada.scene.position.x = -cube.position.x;			
+// 		collada.scene.position.y = cube.position.y + randY; 
+// 		collada.scene.position.z = -cube.position.z;
+// 		
+// 		scene.add(collada.scene);
+// 		});
+// 		
+// 		var loader = new THREE.ColladaLoader();
+// 		loader.load( 'models/drop.dae', function( collada ){
+// 		
+// 		collada.scene.traverse( function ( child ){
+// 			if ( child instanceof THREE.Mesh ){
+// 
+// 				child.material.color = randColor;
+// 				child.material.shininess = 100;
+// 			}
+// 		});
+// 		
+// 		collada.scene.position.x = -cube.position.x;			
+// 		collada.scene.position.y = cube.position.y + randY; 
+// 		collada.scene.position.z = cube.position.z;
+// 		
+// 		scene.add(collada.scene);
+// 		});
+// 		
+// 		var loader = new THREE.ColladaLoader();
+// 		loader.load( 'models/drop.dae', function( collada ){
+// 		
+// 		collada.scene.traverse( function ( child ){
+// 			if ( child instanceof THREE.Mesh ){
+// 
+// 				child.material.color = randColor;
+// 				child.material.shininess = 100;
+// 			}
+// 		});
+// 		
+// 		collada.scene.position.x = cube.position.x;			
+// 		collada.scene.position.y = cube.position.y + randY; 
+// 		collada.scene.position.z = -cube.position.z;
+// 		
+// 		scene.add(collada.scene);
+// 		});
+
+
+		// dae.position.x = cube.position.x; 
+// 		dae.position.y = cube.position.y + randY; 
+// 		dae.position.z = cube.position.z;
+// 		scene.add( dae );
 }
 
 function onclick( event ) {
@@ -436,6 +515,405 @@ function onclick( event ) {
 				Addgeometry();
 
 };
+
+function genFourShapes(shape){
+	var randY = Math.floor((Math.random() * 10)) - 5 ;
+	var randColor = new THREE.Color(Math.random(),Math.random(),Math.random());
+	var randSize = Math.random() / 50;
+	
+	switch(shape){
+	
+	case 1:
+	
+		var loader = new THREE.ColladaLoader();
+		
+		loader.load( 'models/drop.dae', function( collada ){
+		
+		collada.scene.traverse( function ( child ){
+			if ( child instanceof THREE.Mesh ){
+				child.material.color = randColor;
+				child.material.shininess = 100;
+			}
+		});
+		
+		collada.scene.position.x = cube.position.x;			
+		collada.scene.position.y = cube.position.y + randY; 
+		collada.scene.position.z = cube.position.z;
+		
+		collada.scene.scale.x = randSize;
+		collada.scene.scale.y = randSize;
+		collada.scene.scale.z = randSize;
+		
+		// do the rotation here
+		collada.scene.rotation.y = 0;
+		
+		scene.add(collada.scene);
+		});
+		
+		var loader = new THREE.ColladaLoader();
+		loader.load( 'models/drop.dae', function( collada ){
+		
+		collada.scene.traverse( function ( child ){
+			if ( child instanceof THREE.Mesh ){
+
+				child.material.color = randColor;
+				child.material.shininess = 100;
+			}
+		});
+		
+		collada.scene.position.x = -cube.position.x;			
+		collada.scene.position.y = cube.position.y + randY; 
+		collada.scene.position.z = -cube.position.z;
+		
+		collada.scene.scale.x = randSize;
+		collada.scene.scale.y = randSize;
+		collada.scene.scale.z = randSize;
+		
+		// do the rotation here
+		collada.scene.rotation.y = 0;
+		
+		scene.add(collada.scene);
+		});
+		
+		var loader = new THREE.ColladaLoader();
+		loader.load( 'models/drop.dae', function( collada ){
+		
+		collada.scene.traverse( function ( child ){
+			if ( child instanceof THREE.Mesh ){
+
+				child.material.color = randColor;
+				child.material.shininess = 100;
+			}
+		});
+		
+		collada.scene.position.x = -cube.position.x;			
+		collada.scene.position.y = cube.position.y + randY; 
+		collada.scene.position.z = cube.position.z;
+		
+		collada.scene.scale.x = randSize;
+		collada.scene.scale.y = randSize;
+		collada.scene.scale.z = randSize;
+		
+		// do the rotation here
+		collada.scene.rotation.y = 0;
+		
+		scene.add(collada.scene);
+		});
+		
+		var loader = new THREE.ColladaLoader();
+		loader.load( 'models/drop.dae', function( collada ){
+		
+		collada.scene.traverse( function ( child ){
+			if ( child instanceof THREE.Mesh ){
+
+				child.material.color = randColor;
+				child.material.shininess = 100;
+			}
+		});
+		
+		collada.scene.position.x = cube.position.x;			
+		collada.scene.position.y = cube.position.y + randY; 
+		collada.scene.position.z = -cube.position.z;
+		
+		collada.scene.scale.x = randSize;
+		collada.scene.scale.y = randSize;
+		collada.scene.scale.z = randSize;
+		
+		// do the rotation here
+		collada.scene.rotation.y = 0;
+		
+		scene.add(collada.scene);
+		});
+		
+	break;
+	
+	case 2:
+	
+		var loader = new THREE.ColladaLoader();
+		
+		loader.load( 'models/loop.dae', function( collada ){
+		
+		collada.scene.traverse( function ( child ){
+			if ( child instanceof THREE.Mesh ){
+				child.material.color = randColor;
+				child.material.shininess = 100;
+			}
+		});
+		
+		collada.scene.position.x = cube.position.x;			
+		collada.scene.position.y = cube.position.y + randY; 
+		collada.scene.position.z = cube.position.z;
+		
+		collada.scene.scale.x = randSize;
+		collada.scene.scale.y = randSize;
+		collada.scene.scale.z = randSize;
+		
+		// do the rotation here (maybe not y)
+		collada.scene.rotation.y = 0;
+		
+		scene.add(collada.scene);
+		});
+		
+		var loader = new THREE.ColladaLoader();
+		loader.load( 'models/loop.dae', function( collada ){
+		
+		collada.scene.traverse( function ( child ){
+			if ( child instanceof THREE.Mesh ){
+
+				child.material.color = randColor;
+				child.material.shininess = 100;
+			}
+		});
+		
+		collada.scene.position.x = -cube.position.x;			
+		collada.scene.position.y = cube.position.y + randY; 
+		collada.scene.position.z = -cube.position.z;
+		
+		collada.scene.scale.x = randSize;
+		collada.scene.scale.y = randSize;
+		collada.scene.scale.z = randSize;
+		
+		// do the rotation here (maybe not y)
+		collada.scene.rotation.y = 0;
+		
+		scene.add(collada.scene);
+		});
+		
+		var loader = new THREE.ColladaLoader();
+		loader.load( 'models/loop.dae', function( collada ){
+		
+		collada.scene.traverse( function ( child ){
+			if ( child instanceof THREE.Mesh ){
+
+				child.material.color = randColor;
+				child.material.shininess = 100;
+			}
+		});
+		
+		collada.scene.position.x = -cube.position.x;			
+		collada.scene.position.y = cube.position.y + randY; 
+		collada.scene.position.z = cube.position.z;
+		
+		collada.scene.scale.x = randSize;
+		collada.scene.scale.y = randSize;
+		collada.scene.scale.z = randSize;
+		
+		// do the rotation here (maybe not y)
+		collada.scene.rotation.y = 0;
+		
+		scene.add(collada.scene);
+		});
+		
+		var loader = new THREE.ColladaLoader();
+		loader.load( 'models/loop.dae', function( collada ){
+		
+		collada.scene.traverse( function ( child ){
+			if ( child instanceof THREE.Mesh ){
+
+				child.material.color = randColor;
+				child.material.shininess = 100;
+			}
+		});
+		
+		collada.scene.position.x = cube.position.x;			
+		collada.scene.position.y = cube.position.y + randY; 
+		collada.scene.position.z = -cube.position.z;
+		
+		collada.scene.scale.x = randSize;
+		collada.scene.scale.y = randSize;
+		collada.scene.scale.z = randSize;
+		
+		// do the rotation here (maybe not y)
+		collada.scene.rotation.y = 0;
+		
+		scene.add(collada.scene);
+		});
+		
+	break;
+	
+	case 3:
+	
+		var loader = new THREE.ColladaLoader();
+		
+		loader.load( 'models/petal.dae', function( collada ){
+		
+		collada.scene.traverse( function ( child ){
+			if ( child instanceof THREE.Mesh ){
+				child.material.color = randColor;
+				child.material.shininess = 100;
+			}
+		});
+		
+		collada.scene.position.x = cube.position.x;			
+		collada.scene.position.y = cube.position.y + randY; 
+		collada.scene.position.z = cube.position.z;
+		
+		collada.scene.scale.x = randSize;
+		collada.scene.scale.y = randSize;
+		collada.scene.scale.z = randSize;
+		
+		// do the rotation here
+		collada.scene.rotation.y = 0;
+		
+		scene.add(collada.scene);
+		});
+		
+		var loader = new THREE.ColladaLoader();
+		loader.load( 'models/petal.dae', function( collada ){
+		
+		collada.scene.traverse( function ( child ){
+			if ( child instanceof THREE.Mesh ){
+
+				child.material.color = randColor;
+				child.material.shininess = 100;
+			}
+		});
+		
+		collada.scene.position.x = -cube.position.x;			
+		collada.scene.position.y = cube.position.y + randY; 
+		collada.scene.position.z = -cube.position.z;
+		
+		collada.scene.scale.x = randSize;
+		collada.scene.scale.y = randSize;
+		collada.scene.scale.z = randSize;
+		
+		// do the rotation here
+		collada.scene.rotation.y = 0;
+		
+		scene.add(collada.scene);
+		});
+		
+		var loader = new THREE.ColladaLoader();
+		loader.load( 'models/petal.dae', function( collada ){
+		
+		collada.scene.traverse( function ( child ){
+			if ( child instanceof THREE.Mesh ){
+
+				child.material.color = randColor;
+				child.material.shininess = 100;
+			}
+		});
+		
+		collada.scene.position.x = -cube.position.x;			
+		collada.scene.position.y = cube.position.y + randY; 
+		collada.scene.position.z = cube.position.z;
+		
+		collada.scene.scale.x = randSize;
+		collada.scene.scale.y = randSize;
+		collada.scene.scale.z = randSize;
+		
+		// do the rotation here
+		collada.scene.rotation.y = 0;
+		
+		scene.add(collada.scene);
+		});
+		
+		var loader = new THREE.ColladaLoader();
+		loader.load( 'models/petal.dae', function( collada ){
+		
+		collada.scene.traverse( function ( child ){
+			if ( child instanceof THREE.Mesh ){
+
+				child.material.color = randColor;
+				child.material.shininess = 100;
+			}
+		});
+		
+		collada.scene.position.x = cube.position.x;			
+		collada.scene.position.y = cube.position.y + randY; 
+		collada.scene.position.z = -cube.position.z;
+		
+		collada.scene.scale.x = randSize;
+		collada.scene.scale.y = randSize;
+		collada.scene.scale.z = randSize;
+		
+		// do the rotation here
+		collada.scene.rotation.y = 0;
+		
+		scene.add(collada.scene);
+		});
+		
+	break;
+	
+	case 4:
+	
+		var mandala_geometry = new THREE.DodecahedronGeometry( Math.floor((Math.random() * 2)), Math.floor((Math.random() * 3)) );
+	    var mandala_material = new THREE.MeshPhongMaterial( { color: randColor, specular: 0x009900, shininess: 30, shading: THREE.FlatShading } );
+	    var cubes = new THREE.Mesh( mandala_geometry, mandala_material );
+			cubes.position.x = cube.position.x; 
+			cubes.position.y = cube.position.y + randY; 
+			cubes.position.z = cube.position.z;
+		
+		var cubesb = new THREE.Mesh( mandala_geometry, mandala_material );
+			cubesb.position.x = -cube.position.x; 
+			cubesb.position.y = cube.position.y + randY; 
+			cubesb.position.z = -cube.position.z;
+
+		var cubesc = new THREE.Mesh( mandala_geometry, mandala_material );
+			cubesc.position.x = -cube.position.x; 
+			cubesc.position.y = cube.position.y + randY; 
+			cubesc.position.z = cube.position.z;
+
+		var cubesd = new THREE.Mesh( mandala_geometry, mandala_material );
+			cubesd.position.x =  cube.position.x;  
+			cubesd.position.y = cube.position.y + randY; 
+			cubesd.position.z = -cube.position.z;
+
+		scene.add(cubes,cubesb,cubesc,cubesd);
+		
+	break;
+	
+	case 5:
+	
+		var mandala_geometry = new THREE.TorusGeometry(Math.floor((Math.random() * 5)) + 2,Math.random(),20,20);
+	    var mandala_material = new THREE.MeshPhongMaterial( { color: randColor, specular: 0x009900, shininess: 30 } );
+	    var cubes = new THREE.Mesh( mandala_geometry, mandala_material );
+			cubes.position.x = cube.position.x; 
+			cubes.position.y = cube.position.y + randY; 
+			cubes.position.z = cube.position.z;
+			cubes.rotation.x = 1.6;
+		
+		var cubesb = new THREE.Mesh( mandala_geometry, mandala_material );
+			cubesb.position.x = -cube.position.x; 
+			cubesb.position.y = cube.position.y + randY; 
+			cubesb.position.z = -cube.position.z;
+			cubesb.rotation.x = 1.6;
+
+		var cubesc = new THREE.Mesh( mandala_geometry, mandala_material );
+			cubesc.position.x = -cube.position.x; 
+			cubesc.position.y = cube.position.y + randY; 
+			cubesc.position.z = cube.position.z;
+			cubesc.rotation.x = 1.6;
+
+		var cubesd = new THREE.Mesh( mandala_geometry, mandala_material );
+			cubesd.position.x =  cube.position.x;  
+			cubesd.position.y = cube.position.y + randY; 
+			cubesd.position.z = -cube.position.z;
+			cubesd.rotation.x = 1.6;
+
+		scene.add(cubes,cubesb,cubesc,cubesd);
+		
+	break;
+	
+		case 6:
+	
+		var mandala_geometry = new THREE.TorusGeometry(cube.position.x,cube.position.x/4);
+	    var mandala_material = new THREE.MeshPhongMaterial( { color: randColor, specular: 0x009900, shininess: 30, shading: THREE.FlatShading } );
+	    var cubes = new THREE.Mesh( mandala_geometry, mandala_material );
+			cubes.position.x = 0;
+			cubes.position.y = -20; 
+			cubes.position.z = 0;
+			cubes.rotation.x = 1.6;
+
+		scene.add(cubes);
+		
+	break;
+
+	
+	}
+	
+	console.log(cube.position.x);
+}
 
 
 
