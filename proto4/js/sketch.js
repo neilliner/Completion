@@ -1,5 +1,6 @@
 //global vars
 // David
+// This is my new code
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
 
@@ -16,6 +17,10 @@ var dataArray;
 var soundLoaded = false; 
 var dae;
 var manager;
+
+var Yes;
+var no;
+var hellyes;
 
 
 
@@ -416,6 +421,7 @@ function Addgeometry(){
 			cubesd.position.y = cube.position.y + randY; 
 			cubesd.position.z = -cube.position.z;
 
+		scene.add(cubes);
 		scene.add(cubes);
 
 		// dae.position.x = cube.position.x; 
