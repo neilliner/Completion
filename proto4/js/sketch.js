@@ -14,7 +14,7 @@ var analyser;
 var source;
 var dataArray;
 var soundLoaded = false; 
-// var dae;
+var dae;
 var manager;
 
 
