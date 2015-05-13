@@ -14,8 +14,8 @@ var analyser;
 var source;
 var dataArray;
 var soundLoaded = false; 
-var dae;
-var manager, manager2;
+// var dae;
+var manager;
 
 
 
@@ -24,63 +24,56 @@ var manager, manager2;
 
 function init() {
  
-  window.AudioContext = window.AudioContext || window.webkitAudioContext;
-  context = new AudioContext();
+	window.AudioContext = window.AudioContext || window.webkitAudioContext;
+	context = new AudioContext();
 
-  analyser = context.createAnalyser();
-  analyser.smoothingTimeConstant = 1;
-  var bufferLength = analyser.frequencyBinCount;
-  dataArray = new Uint8Array(bufferLength);
+	analyser = context.createAnalyser();
+	analyser.smoothingTimeConstant = 1;
+	var bufferLength = analyser.frequencyBinCount;
+	dataArray = new Uint8Array(bufferLength);
 
-  bufferLoader = new BufferLoader(
-    context,
-    [
-    'music/Moments.mp3',
-    ],
-    finishedLoading
-  );
+	bufferLoader = new BufferLoader(
+	context,
+	[
+	'music/Moments.mp3',
+	],
+	finishedLoading
+	);
 
-  bufferLoader.load();
+	bufferLoader.load();
 
-  analyzer = context.createAnalyser();
+	analyzer = context.createAnalyser();
 
-//****************************** collada ******************************
+	//****************************** collada ******************************
 
-manager = new THREE.LoadingManager();
-manager.onProgress = function ( item, loaded, total ){
-	console.log( item, loaded, total );
-}
-
-// manager2 = new THREE.LoadingManager();
-// manager2.onProgress = function ( item, loaded, total ){
-// 	console.log( item, loaded, total );
-// }
+	manager = new THREE.LoadingManager();
+	manager.onProgress = function ( item, loaded, total ){
+		console.log( item, loaded, total );
+	}
 
 
+	var loader = new THREE.ColladaLoader( manager );
+	loader.load( '/models/drop.dae', function( collada ){
+		dae = collada.scene;
+		console.log("Yes");		
+		dae.scale.set( .005, .005, .005);		
+	});
 
-
-
-var loader = new THREE.ColladaLoader( manager );
-loader.load( '/models/drop.dae', function( collada ){
-
-	dae = collada.scene;
-
-	dae.scale.set( .005, .005, .005);
-
-});
-
+	dae.position.x = cube.position.x; 
+	dae.position.y = cube.position.y + randY; 
+	dae.position.z = cube.position.z;
 }
 
 function finishedLoading(bufferList) {
-  var source1 = context.createBufferSource();
-  source1.buffer = bufferList[0];
+	var source1 = context.createBufferSource();
+	source1.buffer = bufferList[0];
 
-  source1.connect(context.destination);
-  source1.connect(analyser);
+	source1.connect(context.destination);
+	source1.connect(analyser);
 
-  source1.start(0);
+	source1.start(0);
 
-  soundLoaded = true;
+	soundLoaded = true;
 }
 
 //********** BufferLoader Class **********
@@ -251,11 +244,45 @@ for (var i = 0; i < steps; i++) {
  			//scene.add( light );
 };
 
+//-- particles
+var particlesQty = 3000;
+
+	particlesGeometry = new THREE.SphereGeometry( );
+
+    particlesGeometry = new THREE.SphereGeometry(2000, 50, 50);
+
+    materialOptions = {
+        size: 1.0,
+        transparency: true, 
+        opacity: 0.5
+    };
+
+    particlesStuff = new THREE.PointCloudMaterial(materialOptions);
+
+
+for (var i = 0; i < particlesQty; i++) {   
+
+	var particlesVertex = new THREE.Vector3();
+    particlesVertex.x = Math.random() * 2000 - 1000;
+    particlesVertex.y = Math.random() * 1000 - 500;
+    particlesVertex.z = Math.random() * 1000 - 500;
+
+    particlesGeometry.vertices.push(particlesVertex);
+}
+
+particles = new THREE.PointCloud( particlesGeometry, particlesStuff ); // geometry, material
+particles.rotation.x = 90;
+particles.rotation.z = 90;
+scene.add(particles);
+
+scene.fog = new THREE.FogExp2( 0x00cfff, 0.009 ); // color of the particle
+//-- particle
+
 
 //renderer
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
-renderer.setClearColor(0x333F47, 1);
+renderer.setClearColor(0x000000, 1);
 document.body.appendChild( renderer.domElement );
 
 
@@ -390,51 +417,13 @@ function Addgeometry(){
 		// 	cubesd.position.y = cube.position.y + randY; 
 		// 	cubesd.position.z = -cube.position.z;
 
-		//dae1, dae2, dae3, dae4;
 
-		var loader = new THREE.ColladaLoader( manager );
-		loader.load( '/models/drop.dae', function( collada ){
-			dae = collada.scene;
-			dae.scale.set( .005, .005, .005);		
-		});
 
 		dae.position.x = cube.position.x; 
 		dae.position.y = cube.position.y + randY; 
 		dae.position.z = cube.position.z;
-
-		// var loader2 = new THREE.ColladaLoader( manager2 );
-		// loader2.load( '/models/drop.dae', function( collada ){
-		// 	dae2 = collada.scene;
-		// 	dae2.scale.set( .005, .005, .005);
-		// });
-
-		// dae2.position.x = cube.position.x; 
-		// dae2.position.y = cube.position.y + randY; 
-		// dae2.position.z = cube.position.z;
-
-		// loader3.load( '/models/drop.dae', function( collada ){
-		// 	dae3 = collada.scene;
-		// 	dae3.scale.set( .005, .005, .005);
-		// });
-
-		// var loader3 = new THREE.ColladaLoader( manager );
-		// dae3.position.x = cube.position.x; 
-		// dae3.position.y = cube.position.y + randY; 
-		// dae3.position.z = cube.position.z;
-
-		// var loader4 = new THREE.ColladaLoader( manager );
-		// loader4.load( '/models/drop.dae', function( collada ){
-		// 	dae4 = collada.scene;
-		// 	dae4.scale.set( .005, .005, .005);
-		// });
-
-		// dae4.position.x = cube.position.x; 
-		// dae4.position.y = cube.position.y + randY; 
-		// dae4.position.z = cube.position.z;
-
 		scene.add( dae);
-		
-	//};
+
 }
 
 function onclick( event ) {
