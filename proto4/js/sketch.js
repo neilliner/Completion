@@ -4,6 +4,7 @@ var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
 
 var theta = 0;
+var cameraTweenA; 
 
 //music global vars
 
@@ -14,8 +15,10 @@ var analyser;
 var source;
 var dataArray;
 var soundLoaded = false; 
-var dae;
-var manager;
+
+//****************************** Collada Loader ************************//
+
+
 
 
 
@@ -24,56 +27,72 @@ var manager;
 
 function init() {
  
-	window.AudioContext = window.AudioContext || window.webkitAudioContext;
-	context = new AudioContext();
+  window.AudioContext = window.AudioContext || window.webkitAudioContext;
+  context = new AudioContext();
 
-	analyser = context.createAnalyser();
-	analyser.smoothingTimeConstant = 1;
-	var bufferLength = analyser.frequencyBinCount;
-	dataArray = new Uint8Array(bufferLength);
+  analyser = context.createAnalyser();
+  analyser.smoothingTimeConstant = 1;
+  var bufferLength = analyser.frequencyBinCount;
+  dataArray = new Uint8Array(bufferLength);
 
-	bufferLoader = new BufferLoader(
-	context,
-	[
-	'music/Moments.mp3',
-	],
-	finishedLoading
-	);
+  bufferLoader = new BufferLoader(
+    context,
+    [
+    'music/Moments.mp3',
+    ],
+    finishedLoading
+  );
 
-	bufferLoader.load();
+  bufferLoader.load();
 
-	analyzer = context.createAnalyser();
+  analyzer = context.createAnalyser();
 
-	//****************************** collada ******************************
+// var manager = new THREE.LoadingManager();
+// manager.onProgress = function ( item, loaded, total ){
+// 	console.log( item, loaded, total );
+// }
 
-	// manager = new THREE.LoadingManager();
-	// manager.onProgress = function ( item, loaded, total ){
-	// 	console.log( item, loaded, total );
-	// }
+// var texture = new THREE.Texture();
+// var loader = new THREE.ImageLoader( manager );
+// loader.load( 'textures/blue.jpg', function( image ){
 
+// 	texture.image = image;
+// 	texture.needsUpdate = true;
+
+// });
+
+
+// var dae;
 
 	// var loader = new THREE.ColladaLoader( manager );
-	// loader.load( '/models/drop.dae', function( collada ){
-	// 	dae = collada.scene;
-	// 	console.log("Yes");		
-	// 	dae.scale.set( .005, .005, .005);		
-	// });
+// var loader = new THREE.ColladaLoader( manager );
+// loader.load( '/models/drop.dae', function( collada ){
 
-	// dae.position.x = cube.position.x; 
-	// dae.position.y = cube.position.y + randY; 
-	// dae.position.z = cube.position.z;
+// 	dae = collada.scene;
+// 	// console.log(collada);
+
+// 	dae.traverse( function ( child ){
+// 		if ( child instanceof THREE.Mesh ){
+// 			child.material.map = texture;
+// 		}
+// 	});
+
+// 	dae.scale.set( .005, .005, .005);
+// 	scene.add(dae);
+// });
+
 }
 
 function finishedLoading(bufferList) {
-	var source1 = context.createBufferSource();
-	source1.buffer = bufferList[0];
+  var source1 = context.createBufferSource();
+  source1.buffer = bufferList[0];
 
-	source1.connect(context.destination);
-	source1.connect(analyser);
+  source1.connect(context.destination);
+  source1.connect(analyser);
 
-	source1.start(0);
+  source1.start(0);
 
-	soundLoaded = true;
+  soundLoaded = true;
 }
 
 //********** BufferLoader Class **********
@@ -151,16 +170,25 @@ var cameraA = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerH
 	
 	var camerasr = 0;
 
-
+//mover the camera to the top center
+	
+   
+		var view = false;
 //this is top view camera
 var cameraB = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-		
-		cameraB.position.x = 0;
-		cameraB.position.z = 0;
-		cameraB.position.y = 75;
+	cameraB.position.x= 50;
+
+	tweenA = new TWEEN.Tween( cameraB.position );
+    tweenA.to(  { x:0, y:75, z:0} , 100); 
+    tweenA.easing( TWEEN.Easing.Sinusoidal.InOut );	
+   	tweenA.onComplete(function(){
+   		view = true;
+   });
+	
+
 
 	var center = new THREE.Vector3( 0, 0,0) ;
-
+	
 //gemometry
 //this is the look at cube
 var geometry = new THREE.BoxGeometry( 1, 1, 1 );
@@ -244,45 +272,11 @@ for (var i = 0; i < steps; i++) {
  			//scene.add( light );
 };
 
-//-- particles
-var particlesQty = 3000;
-
-	particlesGeometry = new THREE.SphereGeometry( );
-
-    particlesGeometry = new THREE.SphereGeometry(2000, 50, 50);
-
-    materialOptions = {
-        size: 1.0,
-        transparency: true, 
-        opacity: 0.5
-    };
-
-    particlesStuff = new THREE.PointCloudMaterial(materialOptions);
-
-
-for (var i = 0; i < particlesQty; i++) {   
-
-	var particlesVertex = new THREE.Vector3();
-    particlesVertex.x = Math.random() * 2000 - 1000;
-    particlesVertex.y = Math.random() * 1000 - 500;
-    particlesVertex.z = Math.random() * 1000 - 500;
-
-    particlesGeometry.vertices.push(particlesVertex);
-}
-
-particles = new THREE.PointCloud( particlesGeometry, particlesStuff ); // geometry, material
-particles.rotation.x = 90;
-particles.rotation.z = 90;
-scene.add(particles);
-
-scene.fog = new THREE.FogExp2( 0x00cfff, 0.009 ); // color of the particle
-//-- particle
-
 
 //renderer
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
-renderer.setClearColor(0x000000, 1);
+renderer.setClearColor(0x333F47, 1);
 document.body.appendChild( renderer.domElement );
 
 
@@ -359,32 +353,39 @@ function render() {
 
 	cameraA.position.y = .5;
 	cameraA.lookAt(cube.position);
+	
 	renderer.render( scene, cameraA );	
 		
 	}
 
-	else{
-		theta += .025;
-		cubesr += .025;
-		cube.position.x = cubesr * Math.sin(theta);
-		cube.position.z = cubesr * Math.cos(theta);
-
+	else if(view == false){
+		limit = 51;
 		
-		
+		tweenA.start();
 		controls.update();
-		
+		cameraB.lookAt(center);
+		renderer.render( scene, cameraB );
+	}
+
+
+	else{
+		controls.update();
+		cameraB.lookAt(center);
 		renderer.render( scene, cameraB );
 	};
 
+	// console.log(cameraB.position);
 	// make sound frequencies triggering the size of shapes
+	TWEEN.update();
+	// tweenA.update();
 	
-	// if(scene.children.length > 6){
-	// 	for(var i = 6;i < scene.children.length; i++){
-	// 		scene.children[i].scale.x = map(dataArray[Math.floor(map(i,6,scene.children.length,0,1023))],128,255,1,3);
-	// 		scene.children[i].scale.y = map(dataArray[Math.floor(map(i,6,scene.children.length,0,1023))],128,255,1,3);
-	// 		scene.children[i].scale.z = map(dataArray[Math.floor(map(i,6,scene.children.length,0,1023))],128,255,1,3);
-	// 	}
-	// }
+	if(scene.children.length > 6){
+		for(var i = 6;i < scene.children.length; i++){
+			scene.children[i].scale.x = map(dataArray[Math.floor(map(i,6,scene.children.length,0,1023))],128,255,1,3);
+			scene.children[i].scale.y = map(dataArray[Math.floor(map(i,6,scene.children.length,0,1023))],128,255,1,3);
+			scene.children[i].scale.z = map(dataArray[Math.floor(map(i,6,scene.children.length,0,1023))],128,255,1,3);
+		}
+	}
 
 }
 render();
@@ -414,14 +415,12 @@ function Addgeometry(){
 		var cubesd = new THREE.Mesh( mandala_geometry, mandala_material );
 			cubesd.position.x =  cube.position.x;  
 			cubesd.position.y = cube.position.y + randY; 
-			cubesd.position.z = -cube.position.z;
+			cubesd.position.z = -cube.position.z;	
 
-		scene.add(cubes);
 
-		// dae.position.x = cube.position.x; 
-		// dae.position.y = cube.position.y + randY; 
-		// dae.position.z = cube.position.z;
-		// scene.add( dae);
+		scene.add( cubes, cubesb, cubesc, cubesd );
+		
+	//};
 }
 
 function onclick( event ) {
