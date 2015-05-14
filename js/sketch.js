@@ -181,13 +181,13 @@ function map(inputValue, actualMin, actualMax, newMin, newMax) {
 }
 
 // to clear all shapes
-window.onkeydown = function(e){
-	if(e.keyCode === 32){ // temporarily set to spacebar
-   		e.preventDefault();
-   		console.log("spacebar pressed");
-   		scene.children.splice(6,scene.children.length-6);
-   	}
-}
+// window.onkeydown = function(e){
+// 	if(e.keyCode === 32){ // temporarily set to spacebar
+//    		e.preventDefault();
+//    		console.log("spacebar pressed");
+//    		scene.children.splice(6,scene.children.length-6);
+//    	}
+// }
 
 //scene
 var scene = new THREE.Scene();
@@ -346,8 +346,11 @@ renderer.domElement.addEventListener( 'click', onclick, false );
 var controls = new THREE.OrbitControls(cameraB, renderer.domElement);
 controls.maxDistance = 100;
 
+<<<<<<< HEAD
 //var drawingControls = new THREE.OrbitControls(cameraA, renderer.domElement);
 
+=======
+>>>>>>> origin/gh-pages
 //***************** render() ************************
 function render() {
 	requestAnimationFrame( render );
@@ -359,57 +362,53 @@ function render() {
 	}
 	else{
 
-	var limit = cameraA.position.z;
+		var limit = cameraA.position.z;
 
-	if(soundLoaded){
-		analyser.getByteTimeDomainData(dataArray);
-		
-		if((context.currentTime - finishDrawingTime) > 10){ 
-			//console.log(context.currentTime);
-			drawing = false;
+		if(soundLoaded){
+			analyser.getByteTimeDomainData(dataArray);
+			
+			if((context.currentTime - finishDrawingTime) > 10){ 
+				//console.log(context.currentTime);
+				drawing = false;
 
-			jQuery("#hero").removeClass("disappear");
+				jQuery("#hero").removeClass("disappear");
+			}
 		}
-	}
-	//inner light position and movement
-	lightsAR += .0075; 
-	lightsAT += .00755*Math.PI;
+		//inner light position and movement
+		lightsAR += .0075; 
+		lightsAT += .00755*Math.PI;
 
-	for (var i = 0; i < LightsA.length; i++) {
-		
-		if( i == 0 ){
-			LightsA[i].position.x = lightsAR * Math.sin(lightsAT );
-			LightsA[i].position.z = lightsAR * Math.cos(lightsAT );
-		}
+		for (var i = 0; i < LightsA.length; i++) {
+			
+			if( i == 0 ){
+				LightsA[i].position.x = lightsAR * Math.sin(lightsAT );
+				LightsA[i].position.z = lightsAR * Math.cos(lightsAT );
+			}
 
-		else if( i == 1 ){
-			LightsA[i].position.x = lightsAR * Math.sin(lightsAT + (Math.PI/2) );
-			LightsA[i].position.z = lightsAR * Math.cos(lightsAT + (Math.PI/2) );
-		}
+			else if( i == 1 ){
+				LightsA[i].position.x = lightsAR * Math.sin(lightsAT + (Math.PI/2) );
+				LightsA[i].position.z = lightsAR * Math.cos(lightsAT + (Math.PI/2) );
+			}
 
-		else if( i == 2 ){
-			LightsA[i].position.x = lightsAR * Math.sin(lightsAT + (Math.PI) );
-			LightsA[i].position.z = lightsAR * Math.cos(lightsAT + (Math.PI) );
-		}
+			else if( i == 2 ){
+				LightsA[i].position.x = lightsAR * Math.sin(lightsAT + (Math.PI) );
+				LightsA[i].position.z = lightsAR * Math.cos(lightsAT + (Math.PI) );
+			}
 
 
-		else{
-			LightsA[i].position.x = lightsAR * Math.sin(lightsAT + ((3*Math.PI) / 2) );
-			LightsA[i].position.z = lightsAR * Math.cos(lightsAT + ((3*Math.PI) / 2) );
-		}
-	};	
+			else{
+				LightsA[i].position.x = lightsAR * Math.sin(lightsAT + ((3*Math.PI) / 2) );
+				LightsA[i].position.z = lightsAR * Math.cos(lightsAT + ((3*Math.PI) / 2) );
+			}
+		};	
 
-	if (limit <= 50 ) {
+		if (limit <= 50 ) {
 
-		theta += .0125;
-		cubesr += .0125;
-		camerasr = cubesr + 10;
+			theta += .0125;
+			cubesr += .0125;
+			camerasr = cubesr + 10;
 
-		cube.position.x = cubesr * Math.sin(theta);
-		cube.position.z = cubesr * Math.cos(theta);
-		cameraA.position.x = cubesr * Math.sin(theta + .2 );
-		cameraA.position.z = cubesr * Math.cos(theta + .2 );
-
+<<<<<<< HEAD
 		cameraA.position.y = .5;
 
 		cameraA.lookAt(cube.position);
@@ -418,34 +417,55 @@ function render() {
 		renderer.render( scene, cameraA );	
 		
 	}
+=======
+			cube.position.x = cubesr * Math.sin(theta);
+			cube.position.z = cubesr * Math.cos(theta);
+			cameraA.position.x = cubesr * Math.sin(theta + .2 );
+			cameraA.position.z = cubesr * Math.cos(theta + .2 );
 
-	else{
-
-		//isFinishDrawing = true;
-		if(typeof finishDrawingTime === 'undefined'){
-			finishDrawingTime = context.currentTime;
-			isFirsTimeDrawing = false;
-			console.log(finishDrawingTime);
+			cameraA.position.y = .5;
+			cameraA.lookAt(cube.position);
+			renderer.render( scene, cameraA );	
+			
 		}
+>>>>>>> origin/gh-pages
 
+		else{
+
+			//isFinishDrawing = true;
+			if(typeof finishDrawingTime === 'undefined'){
+				finishDrawingTime = context.currentTime;
+				isFirsTimeDrawing = false;
+				console.log(finishDrawingTime);
+			}
+
+<<<<<<< HEAD
 		// theta += .025;
 		// cubesr += .025;
 		// cube.position.x = cubesr * Math.sin(theta);
 		// cube.position.z = cubesr * Math.cos(theta);
+=======
+			theta += .025;
+			cubesr += .025;
+			cube.position.x = cubesr * Math.sin(theta);
+			cube.position.z = cubesr * Math.cos(theta);
+			
+			controls.update();
+>>>>>>> origin/gh-pages
 		
-		controls.update();
-	
-		renderer.render( scene, cameraB );
-	}
+			renderer.render( scene, cameraB );
+		}
 
-//***********-------make sound frequencies triggering the size of shapes-------***********
-// if(scene.children.length > 7){
-// 	for(var i = 7;i < scene.children.length; i++){
-// 		scene.children[i].scale.x = map(dataArray[Math.floor(map(i,7,scene.children.length,0,1023))],128,255,.005,.01);
-// 		scene.children[i].scale.y = map(dataArray[Math.floor(map(i,7,scene.children.length,0,1023))],128,255,.005,.01);
-// 		scene.children[i].scale.z = map(dataArray[Math.floor(map(i,7,scene.children.length,0,1023))],128,255,.005,.01);
-// 	}
-// }
+	//***********-------make sound frequencies triggering the size of shapes-------***********
+		// if(scene.children.length > 7){
+		// 	for(var i = 7;i < scene.children.length; i++){
+		// 		if(dataArray[Math.floor(map(i,7,scene.children.length,0,1023))] > 220){
+		// 			scene.children[i].scale.x = map(dataArray[Math.floor(map(i,7,scene.children.length,0,1023))],128,255,.005,.01);
+		// 			scene.children[i].scale.y = map(dataArray[Math.floor(map(i,7,scene.children.length,0,1023))],128,255,.005,.01);
+		// 			scene.children[i].scale.z = map(dataArray[Math.floor(map(i,7,scene.children.length,0,1023))],128,255,.005,.01);
+		// 		}
+		// 	}
+		// }
 	}
 }
 render();
@@ -477,6 +497,8 @@ function onclick( event ) {
 };
 
 function genFourShapes(shape){
+
+	console.log("Gen Shape: " + shape);
 	var randY = Math.floor((Math.random() * 10)) - 5 ;
 	var randColor = new THREE.Color(Math.random(),Math.random(),Math.random());
 	var randSize = Math.random() / 50;
@@ -588,7 +610,7 @@ function genFourShapes(shape){
 	break;
 	
 	case 2:
-	
+		
 		var loader = new THREE.ColladaLoader();
 		
 		loader.load( 'models/loop.dae', function( collada ){
@@ -604,9 +626,9 @@ function genFourShapes(shape){
 		collada.scene.position.y = cube.position.y + randY; 
 		collada.scene.position.z = cube.position.z;
 		
-		collada.scene.scale.x = randSize;
-		collada.scene.scale.y = randSize;
-		collada.scene.scale.z = randSize;
+		collada.scene.scale.x = randSize * 100;
+		collada.scene.scale.y = randSize * 100;
+		collada.scene.scale.z = randSize * 100;
 		
 		// do the rotation here (maybe not y)
 		collada.scene.rotation.z = Math.PI/2;
@@ -630,13 +652,12 @@ function genFourShapes(shape){
 		collada.scene.position.y = cube.position.y + randY; 
 		collada.scene.position.z = -cube.position.z;
 		
-		collada.scene.scale.x = randSize;
-		collada.scene.scale.y = randSize;
-		collada.scene.scale.z = randSize;
+		collada.scene.scale.x = randSize * 100;
+		collada.scene.scale.y = randSize * 100;
+		collada.scene.scale.z = randSize * 100;
 		
 		// do the rotation here (maybe not y)
 		collada.scene.rotation.z =  Math.PI/2;
-		
 		collada.scene.rotation.y = theta - Math.PI/2;
 		
 		scene.add(collada.scene);
@@ -657,13 +678,12 @@ function genFourShapes(shape){
 		collada.scene.position.y = cube.position.y + randY; 
 		collada.scene.position.z = cube.position.z;
 		
-		collada.scene.scale.x = randSize;
-		collada.scene.scale.y = randSize;
-		collada.scene.scale.z = randSize;
+		collada.scene.scale.x = randSize * 100;
+		collada.scene.scale.y = randSize * 100;
+		collada.scene.scale.z = randSize * 100;
 		
 		// do the rotation here (maybe not y)
 		collada.scene.rotation.z =  Math.PI/2;
-
 		collada.scene.rotation.y = -theta - (3*Math.PI/2);
 		
 		
@@ -685,16 +705,12 @@ function genFourShapes(shape){
 		collada.scene.position.y = cube.position.y + randY; 
 		collada.scene.position.z = -cube.position.z;
 		
-		collada.scene.scale.x = randSize;
-		collada.scene.scale.y = randSize;
-		collada.scene.scale.z = randSize;
+		collada.scene.scale.x = randSize * 100;
+		collada.scene.scale.y = randSize * 100;
+		collada.scene.scale.z = randSize * 100;
 		
 		// do the rotation here (maybe not y)
-		
-
-
 		collada.scene.rotation.z = Math.PI/2;
-		
 		collada.scene.rotation.y = -theta - Math.PI/2;
 		
 		scene.add(collada.scene);

@@ -79,6 +79,38 @@ canvas{
     transition: all 0.5s ease 0s;
 }
 
+/*** ABOUT OVERLAY ***/
+
+.overlay {
+    display: none;
+    position: fixed;
+    top:0;
+    left:0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.description {
+	text-align: center;
+	margin: 10% 5%;
+	padding: 5% 20%;
+}
+
+.description h1{
+	font-family: 'Venera-100','Helvetica Neue', Sans-Serif;
+	font-size: 2em;
+	letter-spacing: 1px;
+}
+.description p{
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: 100;
+	font-size: .90em;
+	letter-spacing: 1px;
+	line-height: 1.80em;
+	color: #ccc;
+}
+
 
 /*** FOOTER ***/
 
