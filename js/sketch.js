@@ -220,7 +220,7 @@ var cube = new THREE.Mesh( geometry, material );
 var cubesr = 0;
 
 scene.add( cube );
-
+cameraA.lookAt(cube.position);
 //this the holder arrays for made geomtry
 var Pointer = [];
 var Madegeomtry = [];
@@ -332,7 +332,7 @@ window.addEventListener( 'resize', function(){
 
 	cameraA.aspect = window.innerWidth / window.innerHeight;
 	cameraA.updateProjectionMatrix();
-	//camera.lookat(cube.position);
+	camera.lookat(cube.position);
 	cameraB.aspect = window.innerWidth / window.innerHeight;
 	cameraB.updateProjectionMatrix();
 
@@ -346,7 +346,7 @@ renderer.domElement.addEventListener( 'click', onclick, false );
 var controls = new THREE.OrbitControls(cameraB, renderer.domElement);
 controls.maxDistance = 100;
 
-var drawingControls = new THREE.OrbitControls(cameraA, renderer.domElement);
+//var drawingControls = new THREE.OrbitControls(cameraA, renderer.domElement);
 
 //***************** render() ************************
 function render() {
@@ -411,9 +411,10 @@ function render() {
 		cameraA.position.z = cubesr * Math.cos(theta + .2 );
 
 		cameraA.position.y = .5;
+
 		cameraA.lookAt(cube.position);
 
-		drawingControls.update();
+		//drawingControls.update();
 		renderer.render( scene, cameraA );	
 		
 	}
@@ -427,10 +428,10 @@ function render() {
 			console.log(finishDrawingTime);
 		}
 
-		theta += .025;
-		cubesr += .025;
-		cube.position.x = cubesr * Math.sin(theta);
-		cube.position.z = cubesr * Math.cos(theta);
+		// theta += .025;
+		// cubesr += .025;
+		// cube.position.x = cubesr * Math.sin(theta);
+		// cube.position.z = cubesr * Math.cos(theta);
 		
 		controls.update();
 	
@@ -450,7 +451,15 @@ function render() {
 render();
 
 function restartDrawing(){
-
+	cameraA.position.x = 0;
+	cameraA.position.z = 0;
+	cube.position.x = 0;
+	cube.position.z = 0;
+	cubesr =0;
+	theta = 0;
+	lightsAT = 0;
+	lightsAR = 0;
+	console.log("reset");
 	//reset all things here.
 
 }
