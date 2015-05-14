@@ -6,6 +6,7 @@
 	<script type="text/javascript" src="js/vendor/three.min.js"></script>
 	<script type="text/javascript" src="js/vendor/OrbitControls.js"></script>
 	<script type="text/javascript" src="js/vendor/ColladaLoader.js"></script>
+	<script type="text/javascript" src="js/vendor/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
   	<link rel="stylesheet" type="text/css" href="css/reset.css">
   	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,400,300,700' rel='stylesheet' type='text/css'>
@@ -24,12 +25,28 @@
 		</div>
 	</section>
 	<section id="footer">
-			<div class="about"><img class="info_icon" src="img/info.svg"></div>
+		<div class="about"><img class="info_icon" src="img/info.svg"></div>
+			<div class="overlay">
+				<div class="description">
+					<h1>ABOUT THE PROJECT</h1>
+					<p>This is a collaborative project by David Eyolfson, Arie Huang, Neil, Kelly Kim and Hannah Smith under the guidance of our instructor Ryan Berkey. <br /> This is a project about completion based on the concept of the Mandala. 
+					The word "mandala" is from the classical Indian language of Sanskrit. In Sanskrit mandala means both circle and center, implying that it represents both the visible world outside of us (the circle- whole world) and the invisible one deep inside our minds and bodies (the center- healing circle). It represents wholeness, and can be seen as a model for the organizational structure of life itself--a cosmic diagram that reminds us of our relation to the infinite, the world that extends both beyond and within our bodies and minds.
+					</p>
+				</div>
+			</div>
 	</section>
 
 	<script type="text/javascript" src="js/sketch.js"></script>
-	
 
-
+	<script type="text/javascript">
+		$(document).ready(function(){
+	    $('.info_icon').click(function(){
+	        $('.overlay').fadeIn();
+	    });
+	    $('.overlay').click(function(){
+	        $(this).fadeOut();
+	    });
+		});
+	</script>	
 </body>
 </html>
