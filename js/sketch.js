@@ -5,6 +5,8 @@ var windowHalfY = window.innerHeight / 2;
 
 var theta = 0;
 
+var startButtonClicked = false;
+
 //music global vars
 
 window.onload = init;
@@ -12,33 +14,66 @@ var context;
 var bufferLoader;
 var analyser;
 var dataArray;
+var source;
 var soundLoaded = false; 
+
+var drawing = false;
+
+//************ jQuery**************
+$.noConflict();
+jQuery( document ).ready(function( $ ) {
+	
+    $(".button").click(function(){
+   		if(!drawing){
+		    startButtonClicked = true;
+		    $("#hero").addClass("disappear");
+    		context = new AudioContext();
+			analyser = context.createAnalyser();
+			analyser.smoothingTimeConstant = 1;
+			var bufferLength = analyser.frequencyBinCount;
+			dataArray = new Uint8Array(bufferLength);
+
+			bufferLoader = new BufferLoader(
+			context,
+			[
+			'audio/Bloom.mp3',
+			'audio/Drowning.mp3',
+			'audio/Wildfire.mp3',
+			],
+			finishedLoading
+			);
+
+			bufferLoader.load();
+			analyzer = context.createAnalyser();
+			drawing = true;
+		}
+    });
+});
 
 //****************************** music functions ******************************
 
 function init() {
- 
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
-	context = new AudioContext();
+	// context = new AudioContext();
 
-	analyser = context.createAnalyser();
-	analyser.smoothingTimeConstant = 1;
-	var bufferLength = analyser.frequencyBinCount;
-	dataArray = new Uint8Array(bufferLength);
+	// analyser = context.createAnalyser();
+	// analyser.smoothingTimeConstant = 1;
+	// var bufferLength = analyser.frequencyBinCount;
+	// dataArray = new Uint8Array(bufferLength);
 
-	bufferLoader = new BufferLoader(
-	context,
-	[
-	'audio/Bloom.mp3',
-	'audio/Drowning.mp3',
-	'audio/Wildfire.mp3',
-	],
-	finishedLoading
-	);
+	// bufferLoader = new BufferLoader(
+	// context,
+	// [
+	// 'audio/Bloom.mp3',
+	// 'audio/Drowning.mp3',
+	// 'audio/Wildfire.mp3',
+	// ],
+	// finishedLoading
+	// );
 
-	bufferLoader.load();
+	// bufferLoader.load();
 
-	analyzer = context.createAnalyser();
+	// analyzer = context.createAnalyser();
 
 	//****************************** collada ******************************
 
@@ -65,15 +100,14 @@ function init() {
 }
 
 function finishedLoading(bufferList) {
-	var source = context.createBufferSource();
+	source = context.createBufferSource();
 	source.buffer = bufferList[Math.floor((Math.random() * 2))];
 
 	source.connect(context.destination);
 	source.connect(analyser);
 
-	source.start(0);
-
-	soundLoaded = true;
+	source.start();
+    soundLoaded = true;	
 }
 
 //********** BufferLoader Class **********
@@ -122,7 +156,7 @@ BufferLoader.prototype.loadBuffer = function(url, index) {
 
 BufferLoader.prototype.load = function() {
 	for (var i = 0; i < this.urlList.length; ++i)
-	this.loadBuffer(this.urlList[i], i);
+		this.loadBuffer(this.urlList[i], i);
 }
 
 //****************************** end of music functions ******************************
@@ -145,6 +179,9 @@ window.onkeydown = function(e){
 var scene = new THREE.Scene();
 
 //cameras
+camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.5, 1000 );
+camera.position.z = -424;
+
 //this is the follow camera
 var cameraA = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 	
@@ -197,11 +234,11 @@ for (var i = 0; i < steps; i++) {
 //spiral lines
 var lmaterial = new THREE.LineBasicMaterial( { color: 0xffffff, opacity: 1, linewidth: 3, vertexColors: THREE.VertexColors } );
 var Sgeometry = new THREE.Geometry();	
-Sgeometry.vertices = spiral.getPoints( 200 );
+	Sgeometry.vertices = spiral.getPoints( 200 );
 
 // Create the final Object3d to add to the scene
 var splineObject = new THREE.Line( Sgeometry, lmaterial );
-scene.add( splineObject );
+	scene.add( splineObject );
 
 // Lights
 //Inner Array of lights	
@@ -295,14 +332,28 @@ renderer.domElement.addEventListener( 'click', onclick, false );
 var controls = new THREE.OrbitControls(cameraB, renderer.domElement);
 controls.maxDistance = 100;
 
-
+//***************** render() ************************
 function render() {
 	requestAnimationFrame( render );
 
+	if(!startButtonClicked){
+		particles.rotation.x += .0009;
+    	particles.rotation.y += .0009;
+    	renderer.render(scene,camera);
+	}
+	else{
+
 	var limit = cameraA.position.z;
 
-	if(soundLoaded) analyser.getByteTimeDomainData(dataArray);
-
+	if(soundLoaded){
+		analyser.getByteTimeDomainData(dataArray);
+		
+		if(context.currentTime > 40){ 
+			//console.log(context.currentTime);
+			drawing = false;
+			jQuery("#hero").removeClass("disappear");
+		}
+	}
 	//inner light position and movement
 	lightsAR += .0075; 
 	lightsAT += .00755*Math.PI;
@@ -356,12 +407,11 @@ function render() {
 		cube.position.z = cubesr * Math.cos(theta);
 		
 		controls.update();
-		
-		renderer.render( scene, cameraB );
-	};
-
-	// make sound frequencies triggering the size of shapes
 	
+		renderer.render( scene, cameraB );
+	}
+
+//***********-------make sound frequencies triggering the size of shapes-------***********
 // if(scene.children.length > 7){
 // 	for(var i = 7;i < scene.children.length; i++){
 // 		scene.children[i].scale.x = map(dataArray[Math.floor(map(i,7,scene.children.length,0,1023))],128,255,.005,.01);
@@ -369,7 +419,7 @@ function render() {
 // 		scene.children[i].scale.z = map(dataArray[Math.floor(map(i,7,scene.children.length,0,1023))],128,255,.005,.01);
 // 	}
 // }
-
+	}
 }
 render();
 
