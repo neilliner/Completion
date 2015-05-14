@@ -237,7 +237,7 @@ for (var i = 0; i < lightB; i++) {
 
 //-- particles
 var particlesQty = 3000;
-particlesGeometry = new THREE.SphereGeometry( );
+
 particlesGeometry = new THREE.SphereGeometry(2000, 50, 50);
 
 materialOptions = {
