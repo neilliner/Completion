@@ -293,7 +293,7 @@ renderer.domElement.addEventListener( 'click', onclick, false );
 
 // add THREE Mouse Camera Orbit Controls to the scene
 var controls = new THREE.OrbitControls(cameraB, renderer.domElement);
-controls.maxDistance = 50;
+controls.maxDistance = 100;
 
 
 function render() {
@@ -304,8 +304,8 @@ function render() {
 	if(soundLoaded) analyser.getByteTimeDomainData(dataArray);
 
 	//inner light position and movement
-	lightsAR += .0125; 
-	lightsAT += .0125*Math.PI;
+	lightsAR += .0075; 
+	lightsAT += .00755*Math.PI;
 
 	for (var i = 0; i < LightsA.length; i++) {
 		
@@ -333,8 +333,8 @@ function render() {
 
 	if (limit <= 50 ) {
 
-		theta += .025;
-		cubesr += .025;
+		theta += .0125;
+		cubesr += .0125;
 		camerasr = cubesr + 10;
 
 		cube.position.x = cubesr * Math.sin(theta);
