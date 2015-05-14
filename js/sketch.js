@@ -1,3 +1,5 @@
+// This is a collaborative project by David Eyolfson, Arie Huang, Neil, Kelly Kim and Hannah Smith under the guidance of our instructor Ryan Berkey. //
+
 //global vars
 
 var windowHalfX = window.innerWidth / 2;
