@@ -348,11 +348,10 @@ renderer.domElement.addEventListener( 'click', onclick, false );
 var controls = new THREE.OrbitControls(cameraB, renderer.domElement);
 controls.maxDistance = 100;
 
-<<<<<<< HEAD
+
 //var drawingControls = new THREE.OrbitControls(cameraA, renderer.domElement);
 
-=======
->>>>>>> origin/gh-pages
+
 //***************** render() ************************
 function render() {
 	requestAnimationFrame( render );
@@ -410,7 +409,7 @@ function render() {
 			cubesr += .0125;
 			camerasr = cubesr + 10;
 
-<<<<<<< HEAD
+
 		cameraA.position.y = .5;
 
 		cameraA.lookAt(cube.position);
@@ -418,8 +417,8 @@ function render() {
 		//drawingControls.update();
 		renderer.render( scene, cameraA );	
 		
-	}
-=======
+	
+
 			cube.position.x = cubesr * Math.sin(theta);
 			cube.position.z = cubesr * Math.cos(theta);
 			cameraA.position.x = cubesr * Math.sin(theta + .2 );
@@ -430,7 +429,7 @@ function render() {
 			renderer.render( scene, cameraA );	
 			
 		}
->>>>>>> origin/gh-pages
+
 
 		else{
 
@@ -441,19 +440,14 @@ function render() {
 				console.log(finishDrawingTime);
 			}
 
-<<<<<<< HEAD
+
 		// theta += .025;
 		// cubesr += .025;
 		// cube.position.x = cubesr * Math.sin(theta);
 		// cube.position.z = cubesr * Math.cos(theta);
-=======
-			theta += .025;
-			cubesr += .025;
-			cube.position.x = cubesr * Math.sin(theta);
-			cube.position.z = cubesr * Math.cos(theta);
 			
 			controls.update();
->>>>>>> origin/gh-pages
+
 		
 			renderer.render( scene, cameraB );
 		}
@@ -500,7 +494,7 @@ function onclick( event ) {
 
 function genFourShapes(shape){
 
-	console.log("Gen Shape: " + shape);
+	//console.log("Gen Shape: " + shape);
 	var randY = Math.floor((Math.random() * 10)) - 5 ;
 	var randColor = new THREE.Color(Math.random(),Math.random(),Math.random());
 	var randSize = Math.random() / 50;
