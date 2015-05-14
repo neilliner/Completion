@@ -469,7 +469,7 @@ function genFourShapes(shape){
 		collada.scene.scale.z = randSize;
 		
 		// do the rotation here
-		collada.scene.rotation.y = 0;
+		collada.scene.rotation.y = theta + Math.PI/2 ;
 		
 		scene.add(collada.scene);
 		});
@@ -494,7 +494,7 @@ function genFourShapes(shape){
 		collada.scene.scale.z = randSize;
 		
 		// do the rotation here
-		collada.scene.rotation.y = 0;
+		collada.scene.rotation.y = theta - Math.PI/2  ;
 		
 		scene.add(collada.scene);
 		});
@@ -519,7 +519,7 @@ function genFourShapes(shape){
 		collada.scene.scale.z = randSize;
 		
 		// do the rotation here
-		collada.scene.rotation.y = 0;
+		collada.scene.rotation.y = -theta - (3*Math.PI)/2 ;
 		
 		scene.add(collada.scene);
 		});
@@ -544,7 +544,7 @@ function genFourShapes(shape){
 		collada.scene.scale.z = randSize;
 		
 		// do the rotation here
-		collada.scene.rotation.y = 0;
+		collada.scene.rotation.y = -theta - Math.PI/2;
 		
 		scene.add(collada.scene);
 		});
