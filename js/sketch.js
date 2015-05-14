@@ -18,6 +18,8 @@ var source;
 var soundLoaded = false; 
 
 var drawing = false;
+var finishDrawingTime;
+var isFirsTimeDrawing = true;
 
 //************ jQuery**************
 $.noConflict();
@@ -25,6 +27,14 @@ jQuery( document ).ready(function( $ ) {
 	
     $(".button").click(function(){
    		if(!drawing){
+   			if(!isFirsTimeDrawing){
+   				source.stop();
+   				console.log("STOP!!");
+   				soundLoaded = false;
+   				scene.children.splice(6,scene.children.length-6);
+
+   				restartDrawing();
+   			}
 		    startButtonClicked = true;
 		    $("#hero").addClass("disappear");
     		context = new AudioContext();
@@ -100,13 +110,17 @@ function init() {
 }
 
 function finishedLoading(bufferList) {
+	songNumber = Math.floor((Math.random() * 3))
 	source = context.createBufferSource();
-	source.buffer = bufferList[Math.floor((Math.random() * 2))];
+	source.buffer = bufferList[songNumber];
+	console.log("Track Number : " + songNumber);
 
 	source.connect(context.destination);
 	source.connect(analyser);
 
+	source.loop = true;
 	source.start();
+
     soundLoaded = true;	
 }
 
@@ -332,6 +346,8 @@ renderer.domElement.addEventListener( 'click', onclick, false );
 var controls = new THREE.OrbitControls(cameraB, renderer.domElement);
 controls.maxDistance = 100;
 
+var drawingControls = new THREE.OrbitControls(cameraA, renderer.domElement);
+
 //***************** render() ************************
 function render() {
 	requestAnimationFrame( render );
@@ -348,9 +364,10 @@ function render() {
 	if(soundLoaded){
 		analyser.getByteTimeDomainData(dataArray);
 		
-		if(context.currentTime > 40){ 
+		if((context.currentTime - finishDrawingTime) > 10){ 
 			//console.log(context.currentTime);
 			drawing = false;
+
 			jQuery("#hero").removeClass("disappear");
 		}
 	}
@@ -395,11 +412,20 @@ function render() {
 
 		cameraA.position.y = .5;
 		cameraA.lookAt(cube.position);
+
+		drawingControls.update();
 		renderer.render( scene, cameraA );	
 		
 	}
 
 	else{
+
+		//isFinishDrawing = true;
+		if(typeof finishDrawingTime === 'undefined'){
+			finishDrawingTime = context.currentTime;
+			isFirsTimeDrawing = false;
+			console.log(finishDrawingTime);
+		}
 
 		theta += .025;
 		cubesr += .025;
@@ -423,8 +449,10 @@ function render() {
 }
 render();
 
-function Addgeometry(){
-	genFourShapes(Math.floor((Math.random() * 6) + 1));
+function restartDrawing(){
+
+	//reset all things here.
+
 }
 
 function onclick( event ) {
@@ -436,8 +464,7 @@ function onclick( event ) {
 	var az = cube.position.z;
 
 	Pointer.push( new THREE.Vector3( ax, ay, az) );
-	Addgeometry();
-
+	genFourShapes(Math.floor((Math.random() * 6) + 1));
 };
 
 function genFourShapes(shape){
