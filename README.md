@@ -2,7 +2,7 @@
 # Final Project 
 ### Symmetrical Interactive Mandala Audio Visualizer
 
-[COMPLETION] (http://neilliner.github.io/Completion/proto4/)
+[COMPLETION] (http://neilliner.github.io/Completion/)
 
 ##Story
 The Sand Mandala is a Tibetan Buddhist tradition involving the meditative, ritualistic creation and destruction of mandalas made from colored sand. A sand mandala is ritualistically dismantled once it has been completed and its accompanying ceremonies and viewing are finished to symbolize the Buddhist doctrinal belief in the transitory nature of material life.[wikipedia](http://en.wikipedia.org/wiki/Sand_mandala)
