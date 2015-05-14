@@ -33,7 +33,7 @@ jQuery( document ).ready(function( $ ) {
    				source.stop();
    				console.log("STOP!!");
    				soundLoaded = false;
-   				scene.children.splice(6,scene.children.length-6);
+   				scene.children.splice(7,scene.children.length-7);
 
    				restartDrawing();
    			}
