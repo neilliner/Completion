@@ -305,9 +305,9 @@ function render() {
 
 	//inner light position and movement
 	lightsAR += .0125; 
-    lightsAT += .0125*Math.PI;
+	lightsAT += .0125*Math.PI;
 
-    for (var i = 0; i < LightsA.length; i++) {
+	for (var i = 0; i < LightsA.length; i++) {
 		
 		if( i == 0 ){
 			LightsA[i].position.x = lightsAR * Math.sin(lightsAT );
